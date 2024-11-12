@@ -1,0 +1,4 @@
+# gpod
+
+## Dependencies
+libgpod

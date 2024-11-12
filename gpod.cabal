@@ -1,0 +1,48 @@
+cabal-version:      3.0
+name:               gpod
+version:            0.0.0.1
+synopsis:           Libgpod bindings to haskell
+homepage:           https://github.com/isaac025/gpod
+license:            BSD-3-Clause
+license-file:       LICENSE
+author:             Isaac Hiram Lopez Diaz
+maintainer:         isaac.lopez@upr.edu
+category:           Development
+build-type:         Simple
+extra-doc-files:    
+    CHANGELOG.md
+    README.md
+
+common warnings
+    ghc-options: -Wall -Werror -Wcompat -Widentities -Wincomplete-uni-patterns -Wincomplete-record-updates -Wno-unused-top-binds -Wno-orphans -Wno-error=unrecognised-warning-flags 
+
+executable hipod
+    import:           warnings
+    build-depends:    base >=4.9.0.0 && <5
+                    , gpod
+    main-is:          Main.hs
+    hs-source-dirs:   app
+    default-language: Haskell2010
+library
+    import:           warnings
+    exposed-modules:  System.Gpod
+    other-modules:    System.Gpod.Types
+    default-extensions:
+        ForeignFunctionInterface
+    build-depends:    base >=4.9.0.0 && <5
+                    , glib
+    build-tool-depends: hsc2hs:hsc2hs
+    pkgconfig-depends:
+        libgpod-1.0,
+        glib-2.0
+    hs-source-dirs:   src
+    default-language: Haskell2010
+
+test-suite gpod-test
+    import:           warnings
+    default-language: Haskell2010
+    type:             exitcode-stdio-1.0
+    hs-source-dirs:   test
+    main-is:          Main.hs
+    build-depends:    base >=4.9.0.0 && <5
+                    , gpod
